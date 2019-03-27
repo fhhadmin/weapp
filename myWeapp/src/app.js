@@ -13,9 +13,9 @@ class App extends Component {
 
   config = {
     pages: [
-      'pages/verification/verification',
-      'pages/index/index',
+      // 'pages/verification/verification',
       'pages/cart/cart',
+      'pages/index/index',
       'pages/classify/classify',
       'pages/self/self'
     ],

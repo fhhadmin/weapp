@@ -3,6 +3,7 @@ import { View, Form, Input, Button } from '@tarojs/components'
 import { AtMessage } from 'taro-ui'
 import WxValidate from '../../utils/WxValidate.js'
 import './verification.less'
+import { url } from 'inspector';
 
 export default class Verification extends Component {
   constructor(){
@@ -11,14 +12,8 @@ export default class Verification extends Component {
 
     }
   }
-  handleEmail(e){
-    console.log(e, 'event')
-  }
-  handleTel(e){
-    console.log(e, 'telephone')
-  }
-  handleIdcard(e){
-    console.log(e, 'idcard')
+  config = {
+    navigationBarTitleText: '登录授权'
   }
   componentWillMount () {
     this.initValidate()
@@ -67,21 +62,31 @@ export default class Verification extends Component {
     const params = e.detail.value
     if(!this.WxValidate.checkForm(params)){
       const error = this.WxValidate.errorList[0]
-      this.showModal(error)
+      Taro.atMessage({
+        message: error.msg
+      })
       return false
     }
+    // 验证成功后
+    this.submitInfo(params)
+
   }
-  showModal(error){
-    console.log(error,'e',this.WxValidate)
+  // 表单提交
+  submitInfo(params){
+    let form = params
+    console.log('将要提交的表单信息', form)
     Taro.atMessage({
-      'message': error.msg,
-      'type': error
+      message: '授权成功！'
     })
+    Taro.switchTab({
+      url: '/pages/index/index'
+    })
+
   }
   render(){
     return(
       <View className='validPage'>
-        <AtMessage />
+        <AtMessage className='msgInfo' />
         <Form onSubmit={this.onSubmit.bind(this)}>
           <View className='container'>
             <View className='container-info'>
@@ -89,13 +94,13 @@ export default class Verification extends Component {
                 <View className='email'>邮箱
                   <Input placeholder='请输入邮箱' name='email'></Input>
                 </View>
-                <View className='idcard'>
-                  身份证号码
-                  <Input maxlength='18' placeholder='请输入身份证号码' type='idcard' name='idcard'></Input>
-                </View>
                 <View className='phone'>
                   手机号码
-                  <Input maxlength='11' placeholder='请输入手机号码' type='number' bindinput='phoneValue' name='tel'></Input>
+                  <Input maxlength='11' placeholder='请输入手机号码' type='number' name='tel'></Input>
+                </View>
+                <View className='idcard'>
+                  身份证号
+                  <Input maxlength='18' placeholder='请输入身份证号码' type='idcard' name='idcard'></Input>
                 </View>
               </View>
             </View>
