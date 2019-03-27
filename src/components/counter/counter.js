@@ -1,10 +1,10 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text, Input } from '@tarojs/components'
+import { View, Text } from '@tarojs/components'
 import './counter.less'
 
 export default class Counter extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state={
       counter: 1
     }
@@ -15,6 +15,9 @@ export default class Counter extends Component {
     this.setState({
       counter: num
     })
+    if(this.props.onAdd){
+      this.props.onAdd({num, index: this.props.indexValue})
+    }
   }
   dec(e){
     e.stopPropagation()
@@ -23,6 +26,9 @@ export default class Counter extends Component {
       this.setState({
         counter: num
       })
+      if(this.props.onDec){
+        this.props.onDec({num, index: this.props.indexValue})
+      }
     }
   }
   render(){
