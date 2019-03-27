@@ -61,17 +61,12 @@ export default class Cart extends Component{
   config = {
     navigationBarTitleText: '购物车'
   }
-  checkbox(E){
-    console.log(E.target.value)
-    // if(this.state.isChecked === true){
-    //   this.setState({
-    //     isChecked: false
-    //   })
-    // }else{
-    //   this.setState({
-    //     isChecked: true
-    //   })
-    // }
+  checkbox(e){
+    console.log(e.target.value)
+    const Indexs = e.target.value
+    Indexs.map(item => {
+      console.log(this.state.goodsList[item],'item')
+    })
   }
   render(){
     const {goodsList,totalMoney} = this.state
