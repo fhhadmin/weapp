@@ -14,16 +14,16 @@ class App extends Component {
   config = {
     pages: [
       // 'pages/verification/verification',
-      'pages/cart/cart',
+      'pages/self/self',
       'pages/index/index',
+      'pages/cart/cart',
       'pages/classify/classify',
-      'pages/self/self'
     ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#33CCFF',
       navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
+      navigationBarTextStyle: 'white'
     },
     tabBar: {
       list:[
