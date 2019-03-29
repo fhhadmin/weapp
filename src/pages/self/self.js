@@ -77,11 +77,6 @@ export default class Self extends Component{
   config = {
     navigationBarTitleText: '个人中心'
   }
-  componentWillMount(){
-    Taro.getStorage({key:'userInfo'}).then(res => {
-      console.log(res,'res')
-    })
-  }
   login(){
 
   }
